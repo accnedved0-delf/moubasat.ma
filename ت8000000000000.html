@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>مبسط.ma | إدارة مبسوطة - تبسيط الإجراءات الإدارية والقانونية في المغرب</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cairo', 'Segoe UI', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.2s ease;
+    }
+    body.dark {
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+    body.dark .card, body.dark .search-box, body.dark .quick-links,
+    body.dark .deadlines, body.dark .cost-card, body.dark .footer,
+    body.dark .modal-content, body.dark .faq-section, body.dark .contact-section {
+      background-color: #1e293b;
+      border-color: #334155;
+    }
+    body.dark .deadline-item { background-color: #0f172a; border-color: #334155; }
+    body.dark .quick-link { background-color: #0f172a; color: #cbd5e1; }
+    body.dark .btn-toggle { border-color: #475569; }
+    body.dark .sub { color: #94a3b8; }
+    body.dark .faq-question { background-color: #0f172a; }
+    body.dark .form-group input, body.dark .form-group textarea {
+      background-color: #0f172a;
+      border-color: #334155;
+      color: #e2e8f0;
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+    .header { text-align: center; padding: 2rem 0 1.5rem; border-bottom: 3px solid #B21E28; margin-bottom: 1.5rem; position: relative; }
+    .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #006233, #B21E28, #006233); }
+    .logo h1 { font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #B21E28, #006233); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .tagline { font-size: 1rem; font-weight: 600; margin-top: 0.5rem; }
+    .sub { font-size: 0.85rem; color: #475569; margin-top: 0.5rem; border-top: 1px dashed #e2e8f0; display: inline-block; padding-top: 0.5rem; }
+    .top-bar { display: flex; justify-content: flex-end; gap: 1rem; padding: 1rem 0 0.5rem; }
+    .btn-toggle { background: transparent; border: 1px solid #cbd5e1; padding: 0.4rem 1rem; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: 0.2s; color: inherit; }
+    .btn-toggle:hover { background: #B21E28; color: white; border-color: #B21E28; }
+    .search-area { margin: 1rem 0; }
+    .search-box { display: flex; background: white; border-radius: 60px; border: 1px solid #e2e8f0; overflow: hidden; }
+    #searchInput { flex: 1; border: none; padding: 0.8rem 1.2rem; font-size: 1rem; background: transparent; text-align: right; outline: none; }
+    #searchBtn { background: #006233; color: white; border: none; padding: 0 1.5rem; cursor: pointer; font-weight: 600; transition: 0.2s; }
+    #searchBtn:hover { background: #B21E28; }
+    .quick-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; background: white; padding: 1rem; border-radius: 1rem; border: 1px solid #e2e8f0; margin: 1rem 0; }
+    .quick-link { background: #f1f5f9; padding: 0.4rem 1rem; border-radius: 40px; text-decoration: none; color: #1e293b; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; }
+    .quick-link:hover { background: #B21E28; color: white; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem 0;
+    }
+    .card {
+      background: white;
+      border-radius: 1.25rem;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .card-header { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
+    .card-header i { font-size: 1.8rem; color: #B21E28; }
+    .card-header h2 { font-size: 1.3rem; margin: 0.3rem 0; }
+    .card-header .subtitle { font-size: 0.8rem; background: #e0f2e9; display: inline-block; padding: 0.1rem 0.6rem; border-radius: 30px; color: #006233; }
+    .steps { padding: 1rem; flex: 1; }
+    .steps ul { list-style: none; padding: 0; }
+    .steps li { display: flex; gap: 0.5rem; margin-bottom: 0.6rem; font-size: 0.85rem; border-bottom: 1px dashed #e2e8f0; padding-bottom: 0.4rem; }
+    .read-btn {
+      background: transparent;
+      border: 1.5px solid #B21E28;
+      color: #B21E28;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      margin: 0 1rem 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+      align-self: flex-start;
+    }
+    .read-btn:hover { background: #B21E28; color: white; }
+    .share-bar {
+      display: flex;
+      justify-content: flex-start;
+      gap: 0.8rem;
+      padding: 0.5rem 1rem 1rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 0.5rem;
+    }
+    .share-icon {
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: 0.2s;
+      color: #475569;
+    }
+    .share-icon:hover { transform: scale(1.1); }
+    .share-icon.whatsapp { color: #25D366; }
+    .share-icon.facebook { color: #1877F2; }
+    .share-icon.twitter { color: #1DA1F2; }
+    .share-icon.linkedin { color: #0077B5; }
+    body.dark .share-icon { color: #94a3b8; }
+    body.dark .share-icon.whatsapp { color: #25D366; }
+    body.dark .share-icon.facebook { color: #1877F2; }
+    body.dark .share-icon.twitter { color: #1DA1F2; }
+    body.dark .share-icon.linkedin { color: #0077B5; }
+    .deadlines {
+      background: white;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      padding: 1rem;
+      margin: 2rem 0 1rem;
+    }
+    .deadlines h3 {
+      color: #B21E28;
+      margin-bottom: 0.8rem;
+    }
+    .deadlines-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .deadline-item {
+      flex: 1;
+      min-width: 160px;
+      background: #f9fafc;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      border-right: 4px solid #10b981;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .deadline-item:hover { transform: translateY(-3px); }
+    .deadline-urgent { border-right-color: #e11d48; background: #fff0f3; }
+    .deadline-warning { border-right-color: #f97316; background: #fff7ed; }
+    body.dark .deadline-urgent { background: #2d1b24; border-right-color: #f87171; }
+    body.dark .deadline-warning { background: #2d231b; border-right-color: #fb923c; }
+    .bottom-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      margin: 2rem 0;
+    }
+    .bottom-row > * {
+      flex: 1;
+      min-width: 280px;
+    }
+    .faq-section {
+      background: white;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      padding: 1rem;
+    }
+    .faq-section h3 {
+      color: #B21E28;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .faq-item {
+      margin-bottom: 0.8rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem;
+      cursor: pointer;
+      font-weight: 700;
+      background: #f8fafc;
+      border-radius: 0.8rem;
+      transition: 0.2s;
+    }
+    .faq-question:hover { background: #e2e8f0; }
+    body.dark .faq-question { background: #0f172a; }
+    body.dark .faq-question:hover { background: #334155; }
+    .faq-question i { transition: transform 0.2s; }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 0.8rem;
+      color: #475569;
+    }
+    body.dark .faq-answer { color: #cbd5e1; }
+    .faq-answer.open {
+      max-height: 300px;
+      padding: 0.5rem 0.8rem 0.8rem;
+    }
+    .faq-question .fa-chevron-down { transform: rotate(0deg); }
+    .faq-question.open .fa-chevron-down { transform: rotate(180deg); }
+    .cost-card {
+      background: white;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    .cost-card span { font-weight: 600; }
+    .cost-btn {
+      background: #006233;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .cost-btn:hover { background: #B21E28; }
+    .no-results { text-align: center; padding: 2rem; background: white; border-radius: 1rem; margin: 1rem 0; }
+    .hidden { display: none; }
+    .contact-section {
+      background: white;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .contact-section h3 { color: #B21E28; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 0.8rem;
+      border: 1px solid #cbd5e1;
+      font-family: inherit;
+      background: #f8fafc;
+    }
+    .submit-btn {
+      background: #006233;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .submit-btn:hover { background: #B21E28; }
+    .contact-note { font-size: 0.8rem; margin-top: 1rem; color: #475569; }
+    body.dark .contact-note { color: #94a3b8; }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+    .modal.active { visibility: visible; opacity: 1; }
+    .modal-content {
+      background: white;
+      max-width: 550px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border-top: 5px solid #B21E28;
+    }
+    .modal-content a { color: #006233; text-decoration: none; }
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-start;
+      margin-top: 1rem;
+    }
+    .print-btn {
+      background: #e2e8f0;
+      color: #1e293b;
+      border: none;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    body.dark .print-btn {
+      background: #334155;
+      color: #e2e8f0;
+    }
+    .admin-form-group {
+      margin-bottom: 1rem;
+    }
+    .admin-form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .admin-form-group input, .admin-form-group textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #cbd5e1;
+      font-family: inherit;
+    }
+    body.dark .admin-form-group input, body.dark .admin-form-group textarea {
+      background: #0f172a;
+      border-color: #334155;
+      color: #e2e8f0;
+    }
+    .footer {
+      background: white;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+    }
+    .chat-bubble {
+      position: fixed;
+      bottom: 1.2rem;
+      left: 1.2rem;
+      background: #006233;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 99;
+      transition: 0.2s;
+    }
+    .chat-bubble:hover { background: #B21E28; }
+    @media (max-width: 640px) {
+      .container { padding: 0 12px; }
+      .cards-grid { gap: 1rem; }
+      .search-box { flex-wrap: wrap; background: transparent; border: none; padding: 0; gap: 0.5rem; }
+      #searchInput { background: white; border-radius: 60px; padding: 0.6rem 1rem; border: 1px solid #e2e8f0; }
+      #searchBtn { width: 100%; padding: 0.5rem; border-radius: 60px; }
+      body.dark #searchInput { background: #1e293b; border-color: #334155; }
+      .bottom-row { flex-direction: column; }
+      .share-bar { justify-content: center; }
+    }
+    @media print {
+      body * { visibility: hidden; }
+      .modal-content, .modal-content * { visibility: visible; }
+      .modal { position: absolute; top: 0; left: 0; width: 100%; height: auto; background: white; visibility: visible; opacity: 1; }
+      .modal-overlay, .modal-buttons, .close-modal-btn, .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="container top-bar">
+  <button id="adminBtn" class="btn-toggle">🔐 Admin</button>
+  <button id="themeToggle" class="btn-toggle">🌙 داكن</button>
+  <button id="langToggle" class="btn-toggle">🇫🇷 Français</button>
+</div>
+<div class="header">
+  <div class="logo"><h1 id="siteTitle">مبسط.ma | إدارة مبسوطة</h1></div>
+  <div class="tagline" id="taglineText">بسّط إجراءاتك الإدارية والقانونية في المغرب</div>
+  <div class="sub" id="subText">✨ أدلة خطوة بخطوة بالدارجة والعربية: تأسيس الشركات، الوثائق الثبوتية، الضرائب والضمان الاجتماعي</div>
+</div>
+
+<div class="container">
+  <div class="search-area">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔎 ابحث عن تأسيس شركة، CNSS، بطاقة وطنية...">
+      <button id="searchBtn">بحث</button>
+    </div>
+  </div>
+
+  <div class="quick-links" id="quickLinks"></div>
+
+  <div id="cardsContainer" class="cards-grid"></div>
+  <div id="noResults" class="no-results hidden">❌ لا توجد نتائج مطابقة</div>
+
+  <div class="deadlines">
+    <h3 id="deadlinesTitle">📅 التواريخ الإدارية الهامة</h3>
+    <div class="deadlines-grid" id="deadlinesGrid"></div>
+  </div>
+
+  <div class="bottom-row">
+    <div class="faq-section">
+      <h3 id="faqTitle"><i class="fas fa-question-circle"></i> <span>الأسئلة الشائعة</span></h3>
+      <div id="faqContainer"></div>
+    </div>
+    <div class="cost-card">
+      <span id="costTeaser">💰 احسب التكلفة التقديرية لتأسيس شركتك (مع رأس المال)</span>
+      <button id="openCostCalc" class="cost-btn">ابدأ الحساب</button>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <h3 id="contactTitle"><i class="fas fa-envelope"></i> <span>تواصل معنا</span></h3>
+    <form id="contactForm" action="#" method="get">
+      <div class="form-group">
+        <label id="nameLabel">الاسم الكامل</label>
+        <input type="text" id="contactName" required>
+      </div>
+      <div class="form-group">
+        <label id="emailLabel">البريد الإلكتروني</label>
+        <input type="email" id="contactEmail" required>
+      </div>
+      <div class="form-group">
+        <label id="messageLabel">الرسالة</label>
+        <textarea id="contactMessage" rows="3" required></textarea>
+      </div>
+      <button type="submit" id="submitBtn" class="submit-btn">إرسال</button>
+      <div class="contact-note" id="contactNote">📧 سيتم فتح برنامج البريد الإلكتروني الخاص بك لإرسال رسالتك مباشرة إلى فريق الدعم.</div>
+    </form>
+  </div>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content" id="modalContent">
+    <div class="modal-buttons">
+      <button id="printModalBtn" class="print-btn"><i class="fas fa-print"></i> طباعة / PDF</button>
+      <button id="closeModalBtn" class="close-modal-btn" style="background:#eef2ff; border:none; padding:0.3rem 1rem; border-radius:40px;">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<div id="chatBubble" class="chat-bubble">💬 بحاجة مساعدة؟</div>
+
+<footer class="footer">
+  <div>🇲🇦 <span id="copyright">© 2025 مبسط.ma | إدارة مبسوطة</span></div>
+  <div class="disclaimer" id="disclaimerText" style="font-size:0.7rem;">⚠️ هذا الموقع للإرشاد فقط – يُرجى مراجعة المصادر الرسمية.</div>
+</footer>
+
+<script>
+  // ======================= البيانات الأساسية =======================
+  const defaultTranslations = {
+    ar: {
+      siteTitle: "مبسط.ma | إدارة مبسوطة",
+      tagline: "بسّط إجراءاتك الإدارية والقانونية في المغرب",
+      sub: "✨ أدلة خطوة بخطوة بالدارجة والعربية: تأسيس الشركات، الوثائق الثبوتية، الضرائب والضمان الاجتماعي",
+      searchPlaceholder: "🔎 ابحث عن تأسيس شركة، CNSS، بطاقة وطنية...",
+      searchBtn: "بحث",
+      deadlinesTitle: "📅 التواريخ الإدارية الهامة",
+      costTeaser: "💰 احسب التكلفة التقديرية لتأسيس شركتك (مع رأس المال)",
+      costBtn: "ابدأ الحساب",
+      noResults: "❌ لا توجد نتائج مطابقة",
+      readMore: "اقرأ المزيد",
+      close: "إغلاق",
+      copyright: "© 2025 مبسط.ma | إدارة مبسوطة – تبسيط الإجراءات",
+      disclaimer: "⚠️ هذا الموقع للإرشاد فقط – يُرجى مراجعة المصادر الرسمية.",
+      chatAlert: "💬 للمساعدة الشخصية، يرجى التواصل مع الإدارة المعنية مباشرة.",
+      faqTitle: "الأسئلة الشائعة",
+      faqItems: [
+        { question: "شنو الفرق بين SARL و SUARL؟", answer: "SARL (شركة ذات مسؤولية محدودة) تحتاج على الأقل شريك واحد، وتصلح للأعمال المتوسطة. SUARL (شخص واحد) مخصصة للمقاول الفردي الذي يباشر نشاطه بمفرده. الاختلافات: عدد الشركاء، التسيير، والمسؤولية الضريبية." },
+        { question: "واش نقدر نخرج شهادة الميلاد إلكترونياً من غير ما نمشي للجماعة؟", answer: "نعم، يمكنك استخراج شهادة الميلاد الإلكترونية الرسمية عبر منصة Watiqa.ma. سجل الدخول برقم هاتفك ثم اختر 'شهادة الميلاد' وحملها بصيغة PDF معتمدة." },
+        { question: "واش CNSS خاص حتى للمقاول الذاتي (auto-entrepreneur)؟", answer: "التسجيل في CNSS للمقاول الذاتي اختياري، لكنه مفيد للتغطية الصحية والتعويضات. إذا كان عندك عمال، التسجيل إجباري. يمكنك التسجيل عبر موقع CNSS.ma." },
+        { question: "شنو هي عقوبات التأخير في التصريح بالدخل أو CNSS؟", answer: "التأخير في التصريح بالدخل (IR أو IS) يؤدي إلى غرامات تصل إلى 15% من المبلغ المستحق. أما CNSS، فتطبق غرامة 5% + فائدة قانونية عن كل شهر تأخير." }
+      ],
+      quickLinks: [
+        { name: "OMPIC", url: "https://www.ompic.ma", icon: "🏢" },
+        { name: "CNSS", url: "https://www.cnss.ma", icon: "🛡️" },
+        { name: "Watiqa", url: "https://www.watiqa.ma", icon: "📄" },
+        { name: "الضرائب (DGI)", url: "https://www.tax.gov.ma", icon: "📊" },
+        { name: "جواز السفر", url: "https://www.passeport.ma", icon: "✈️" }
+      ],
+      deadlines: [
+        { name: "التصريح السنوي بالدخل (IR)", date: "2025-04-30", details: "آخر أجل 30 أبريل. يمكن التصريح عبر موقع tax.gov.ma. التأخير يؤدي إلى غرامات." },
+        { name: "دفع اشتراكات CNSS", date: "2025-04-30", details: "آخر يوم في كل شهر. يفضل الدفع عبر CNSS direct لتجنب الغرامات." },
+        { name: "تجديد البطاقة الوطنية", date: null, details: "يجب تجديد البطاقة الوطنية قبل 3 أشهر من تاريخ انتهاء صلاحيتها. التقديم في الجماعة أو وكالة الوثائق المدنية." },
+        { name: "التصريح السنوي للشركات (IS)", date: "2025-03-15", details: "آخر أجل للإيداع هو 15 مارس. يمكن الإيداع عبر موقع tax.gov.ma." }
+      ],
+      cards: [
+        { id: "company", title: "تأسيس الشركات", subtitle: "SARL / SUARL بالخطوات", icon: "fa-building", steps: ["اختيار الشكل القانوني", "شهادة السلبية OMPIC", "التسجيل في السجل التجاري", "النشر في الجريدة الرسمية", "التسجيل في الضرائب وCNSS"], modalContent: `<p><strong>📌 دليل تأسيس الشركة (SARL/SUARL) في المغرب</strong></p><ul><li><strong>اختيار الشكل القانوني:</strong> SARL أو SUARL.</li><li><strong>شهادة السلبية:</strong> <a href="https://www.ompic.ma" target="_blank">OMPIC</a> (~120 درهم).</li><li><strong>إيداع رأس المال:</strong> فتح حساب بنكي وإيداع رأس المال (يبدأ من 1000 درهم).</li><li><strong>التسجيل في السجل التجاري:</strong> تقديم الملف للمحكمة التجارية (~300-600 درهم).</li><li><strong>النشر في الجريدة الرسمية:</strong> إعلان قانوني (~800-1200 درهم).</li><li><strong>التسجيل في الضرائب وCNSS:</strong> الحصول على رقم التعريف الضريبي والتسجيل في الضمان الاجتماعي.</li></ul><p><strong>روابط مفيدة:</strong> <a href="https://www.ompic.ma" target="_blank">OMPIC</a> | <a href="https://www.tax.gov.ma" target="_blank">tax.gov.ma</a> | <a href="https://www.cnss.ma" target="_blank">CNSS</a></p><p>💡 يمكنك الاستعانة بمحاسب لتسهيل الإجراءات.</p>` },
+        { id: "identity", title: "الوثائق الثبوتية", subtitle: "CIN · جواز السفر · السجل العدلي", icon: "fa-id-card", steps: ["الحصول على البطاقة الوطنية وتجديدها", "استخراج جواز السفر", "السجل العدلي '3adli'", "شهادة الميلاد عبر 'وثيقة'"], modalContent: `<p><strong>🆔 دليل استخراج وتجديد الوثائق الشخصية</strong></p><ul><li><strong>البطاقة الوطنية (CIN):</strong> توجه إلى جماعتك أو وكالة الوثائق المدنية. أحضر صورتين شمسيتين، شهادة ميلاد إلكترونية (من <a href="https://www.watiqa.ma" target="_blank">Watiqa.ma</a>) وثمن 80 درهم. المدة: 7 أيام.</li><li><strong>جواز السفر:</strong> قدم طلب أونلاين عبر <a href="https://www.passeport.ma" target="_blank">Passeport.ma</a>. اطبع الإيصال وتوجه لمكتب الجوازات لأخذ البصمات. التكلفة ~500 درهم، صالح 5 سنوات.</li><li><strong>السجل العدلي (الشهادة 3adli):</strong> استخرجه إلكترونياً من <a href="https://www.adala.justice.gov.ma" target="_blank">adala.justice.gov.ma</a> أو من المحكمة الابتدائية. الخدمة مجانية أو برسم 20 درهم.</li><li><strong>شهادة الميلاد:</strong> منصة <a href="https://www.watiqa.ma" target="_blank">Watiqa.ma</a> تتيح استخراجها بصيغة إلكترونية رسمية دون تنقل. سجل الدخول برقم هاتفك ثم حمل الشهادة.</li></ul><p><strong>نصائح:</strong> جدد بطاقتك قبل 3 أشهر من انتهاء الصلاحية. السجل العدلي ضروري للتوظيف والسفر.</p>` },
+        { id: "tax", title: "الضرائب والضمان الاجتماعي", subtitle: "CNSS · TVA · التصريح السنوي", icon: "fa-chart-line", steps: ["التسجيل في TVA", "التصريح السنوي بالدخل", "التسجيل في CNSS والاشتراكات", "التصريح بالأجور"], modalContent: `<p><strong>📊 دليل الضرائب والضمان الاجتماعي</strong></p><ul><li><strong>التسجيل في TVA:</strong> إجباري إذا تجاوز رقم المعاملات السنوي 500.000 درهم للخدمات أو 1.000.000 درهم للبيع. التسجيل عبر <a href="https://www.tax.gov.ma" target="_blank">tax.gov.ma</a>.</li><li><strong>التصريح السنوي بالدخل (IR):</strong> آخر أجل 30 أبريل من كل عام. يمكن إيداعه إلكترونياً عبر موقع الضرائب.</li><li><strong>CNSS:</strong> يجب على كل مشغل تسجيل عماله. المقاول الذاتي يمكنه التسجيل اختيارياً. الاشتراكات تدفع قبل آخر يوم من الشهر عبر <a href="https://www.cnss.ma" target="_blank">CNSS direct</a>.</li><li><strong>الغرامات:</strong> التأخير في التصريح يؤدي إلى غرامات قد تصل 15% من المبلغ المستحق.</li></ul><p><strong>نصائح:</strong> استعن بمحاسب قانوني لتجنب الغرامات. أنشئ حساباً على منصة "تداول" (Tadawoul).</p>` }
+      ],
+      contactTitle: "تواصل معنا",
+      nameLabel: "الاسم الكامل",
+      emailLabel: "البريد الإلكتروني",
+      messageLabel: "الرسالة",
+      submitBtn: "إرسال",
+      contactNote: "📧 سيتم فتح برنامج البريد الإلكتروني الخاص بك لإرسال رسالتك مباشرة إلى فريق الدعم.",
+      mailtoSubject: "استفسار من موقع مبسط.ma",
+      mailtoBodyPrefix: "الاسم: ",
+      mailtoBodySuffix: "\n\nالرسالة: ",
+      shareMessagePrefix: "اطلع على هذا الدليل: "
+    },
+    fr: {
+      siteTitle: "Mubassit.ma | Administration Simplifiée",
+      tagline: "Simplifiez vos démarches administratives et légales au Maroc",
+      sub: "✨ Guides pas à pas en darija et français : création d'entreprise, documents, impôts et CNSS.",
+      searchPlaceholder: "🔎 Rechercher | création, CNSS, carte d'identité...",
+      searchBtn: "Rechercher",
+      deadlinesTitle: "📅 Dates administratives importantes",
+      costTeaser: "💰 Estimez le coût de création de votre entreprise (capital inclus)",
+      costBtn: "Calculer",
+      noResults: "❌ Aucune procédure trouvée",
+      readMore: "Lire la suite →",
+      close: "Fermer",
+      copyright: "© 2025 Mubassit.ma | Administration Simplifiée",
+      disclaimer: "⚠️ Avertissement : site indicatif – consultez les sources officielles.",
+      chatAlert: "💬 Pour aide personnalisée, contactez l'administration directement.",
+      faqTitle: "Foire aux questions",
+      faqItems: [
+        { question: "Quelle différence entre SARL et SUARL ?", answer: "SARL nécessite au moins un associé. SUARL est pour l'entrepreneur individuel. Différences : nombre d'associés, gestion, responsabilité fiscale." },
+        { question: "Puis-je obtenir un acte de naissance en ligne ?", answer: "Oui, sur Watiqa.ma. Connectez-vous et téléchargez l'acte de naissance certifié." },
+        { question: "La CNSS est-elle obligatoire pour l'auto-entrepreneur ?", answer: "Facultative mais recommandée. Obligatoire si vous avez des salariés." },
+        { question: "Quelles pénalités en cas de retard ?", answer: "IR/IS : amende jusqu'à 15%. CNSS : 5% + intérêts par mois." }
+      ],
+      quickLinks: [
+        { name: "OMPIC", url: "https://www.ompic.ma", icon: "🏢" },
+        { name: "CNSS", url: "https://www.cnss.ma", icon: "🛡️" },
+        { name: "Watiqa", url: "https://www.watiqa.ma", icon: "📄" },
+        { name: "Impôts (DGI)", url: "https://www.tax.gov.ma", icon: "📊" },
+        { name: "Passeport", url: "https://www.passeport.ma", icon: "✈️" }
+      ],
+      deadlines: [
+        { name: "Déclaration annuelle IR", date: "2025-04-30", details: "Dernier délai 30 avril via tax.gov.ma." },
+        { name: "Paiement CNSS", date: "2025-04-30", details: "Dernier jour du mois, paiement CNSS direct." },
+        { name: "Renouvellement CIN", date: null, details: "3 mois avant expiration." },
+        { name: "Déclaration annuelle IS", date: "2025-03-15", details: "Dernier délai 15 mars." }
+      ],
+      cards: [
+        { id: "company", title: "Création d'entreprise", subtitle: "SARL / SUARL pas à pas", icon: "fa-building", steps: ["Choisir forme juridique", "Certificat négatif OMPIC", "Inscription registre commerce", "Publication bulletin officiel", "Inscription fiscale et CNSS"], modalContent: `<p><strong>📌 Guide création SARL/SUARL</strong></p><ul><li><a href="https://www.ompic.ma" target="_blank">OMPIC</a> ~120 DH</li><li>Registre commerce ~300-600 DH</li><li>Publication ~800-1200 DH</li><li>Inscription fiscale et CNSS</li></ul><p>💡 Faites appel à un comptable.</p>` },
+        { id: "identity", title: "Documents d'identité", subtitle: "CIN · Passeport · Casier judiciaire", icon: "fa-id-card", steps: ["Obtenir/renouveler CIN", "Obtenir passeport", "Casier judiciaire '3adli'", "Acte de naissance via Watiqa"], modalContent: `<p><strong>🆔 Guide documents d'identité</strong></p><ul><li><strong>CIN :</strong> Rendez-vous à votre commune. Apportez deux photos, un acte de naissance (depuis <a href="https://www.watiqa.ma" target="_blank">Watiqa.ma</a>) et 80 DH. Délai : 7 jours.</li><li><strong>Passeport :</strong> Demande en ligne sur <a href="https://www.passeport.ma" target="_blank">Passeport.ma</a>. Coût ~500 DH, valable 5 ans.</li><li><strong>Casier judiciaire (3adli) :</strong> À obtenir sur <a href="https://www.adala.justice.gov.ma" target="_blank">adala.justice.gov.ma</a> ou au tribunal. Gratuit ou 20 DH.</li><li><strong>Acte de naissance :</strong> Téléchargez-le officiellement sur <a href="https://www.watiqa.ma" target="_blank">Watiqa.ma</a> sans vous déplacer.</li></ul><p><strong>Conseils :</strong> Renouvelez votre CIN 3 mois avant expiration.</p>` },
+        { id: "tax", title: "Impôts & CNSS", subtitle: "CNSS · TVA · IR", icon: "fa-chart-line", steps: ["Inscription TVA", "Déclaration IR", "Inscription CNSS", "Déclaration salaires"], modalContent: `<p><strong>📊 Impôts et CNSS</strong></p><ul><li>TVA: <a href="https://www.tax.gov.ma" target="_blank">tax.gov.ma</a></li><li>IR: délai 30 avril</li><li>CNSS: <a href="https://www.cnss.ma" target="_blank">CNSS direct</a></li><li>Pénalités jusqu'à 15%</li></ul>` }
+      ],
+      contactTitle: "Contactez-nous",
+      nameLabel: "Nom complet",
+      emailLabel: "Adresse e-mail",
+      messageLabel: "Message",
+      submitBtn: "Envoyer",
+      contactNote: "📧 Votre client de messagerie s'ouvrira pour envoyer votre message.",
+      mailtoSubject: "Demande depuis Mubassit.ma",
+      mailtoBodyPrefix: "Nom: ",
+      mailtoBodySuffix: "\n\nMessage: ",
+      shareMessagePrefix: "Découvrez ce guide : "
+    }
+  };
+
+  let translations = JSON.parse(localStorage.getItem('mubassit_translations')) || defaultTranslations;
+  let currentLang = localStorage.getItem('mubassit_lang') || 'ar';
+  let isDark = localStorage.getItem('mubassit_theme') === 'dark';
+
+  // DOM Elements
+  const themeBtn = document.getElementById('themeToggle');
+  const langBtn = document.getElementById('langToggle');
+  const adminBtn = document.getElementById('adminBtn');
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const cardsContainer = document.getElementById('cardsContainer');
+  const noResultsDiv = document.getElementById('noResults');
+  const modal = document.getElementById('modal');
+  const modalContentDiv = document.getElementById('modalContent');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const printModalBtn = document.getElementById('printModalBtn');
+  const openCostCalcBtn = document.getElementById('openCostCalc');
+  const deadlinesGrid = document.getElementById('deadlinesGrid');
+  const quickLinksDiv = document.getElementById('quickLinks');
+  const chatBubble = document.getElementById('chatBubble');
+  const faqContainer = document.getElementById('faqContainer');
+  const faqTitle = document.getElementById('faqTitle');
+  const costTeaserSpan = document.getElementById('costTeaser');
+  const costBtnSpan = document.querySelector('.cost-btn');
+  const contactForm = document.getElementById('contactForm');
+  const contactName = document.getElementById('contactName');
+  const contactEmail = document.getElementById('contactEmail');
+  const contactMessage = document.getElementById('contactMessage');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function renderQuickLinks() {
+    const t = translations[currentLang];
+    quickLinksDiv.innerHTML = t.quickLinks.map(link => `<a href="${link.url}" target="_blank" class="quick-link">${link.icon} ${link.name}</a>`).join('');
+  }
+
+  function renderDeadlines() {
+    const t = translations[currentLang];
+    const today = new Date(); today.setHours(0,0,0,0);
+    deadlinesGrid.innerHTML = t.deadlines.map(dl => {
+      let remainingText = '', dateDisplay = '', statusClass = '';
+      if (dl.date) {
+        const target = new Date(dl.date);
+        const daysDiff = Math.ceil((target - today) / (1000*60*60*24));
+        if (daysDiff <= 15) statusClass = 'deadline-urgent';
+        else if (daysDiff <= 30) statusClass = 'deadline-warning';
+        remainingText = daysDiff < 0 ? (currentLang === 'ar' ? 'انتهى' : 'Expiré') : (currentLang === 'ar' ? `باقي ${daysDiff} يوماً` : `${daysDiff} jours restants`);
+        dateDisplay = dl.date.split('-').reverse().join('/');
+      } else {
+        remainingText = currentLang === 'ar' ? 'تذكير دوري' : 'Rappel périodique';
+        dateDisplay = currentLang === 'ar' ? 'حسب الإصدار' : 'selon délivrance';
+      }
+      return `<div class="deadline-item ${statusClass}" data-details="${dl.details.replace(/"/g, '&quot;')}"><div><strong>${dl.name}</strong></div><div>${dateDisplay}</div><div style="font-size:0.75rem;">${remainingText}</div></div>`;
+    }).join('');
+    document.querySelectorAll('.deadline-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const details = el.getAttribute('data-details');
+        const title = el.querySelector('strong')?.innerText || '';
+        openModalWithContent(`<h3>${title}</h3><p>${details}</p>`);
+      });
+    });
+  }
+
+  function renderFAQ() {
+    const t = translations[currentLang];
+    faqTitle.innerHTML = `<i class="fas fa-question-circle"></i> <span>${t.faqTitle}</span>`;
+    faqContainer.innerHTML = t.faqItems.map((item, idx) => `
+      <div class="faq-item">
+        <div class="faq-question" data-idx="${idx}">
+          <span>${item.question}</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer" id="faq-answer-${idx}">${item.answer}</div>
+      </div>
+    `).join('');
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const idx = q.getAttribute('data-idx');
+        const answerDiv = document.getElementById(`faq-answer-${idx}`);
+        answerDiv.classList.toggle('open');
+        q.classList.toggle('open');
+      });
+    });
+  }
+
+  function openModalWithContent(htmlContent) {
+    const t = translations[currentLang];
+    modalContentDiv.innerHTML = `
+      <div>${htmlContent}</div>
+      <div class="modal-buttons" style="margin-top:1rem; display:flex; gap:0.8rem;">
+        <button id="printInnerBtn" class="print-btn"><i class="fas fa-print"></i> ${currentLang === 'ar' ? 'طباعة / PDF' : 'Imprimer / PDF'}</button>
+        <button id="closeInnerBtn" class="close-modal-btn" style="background:#eef2ff; border:none; padding:0.3rem 1rem; border-radius:40px;">${t.close}</button>
+      </div>
+    `;
+    modal.classList.add('active');
+    document.getElementById('printInnerBtn')?.addEventListener('click', () => {
+      const printContent = modalContentDiv.cloneNode(true);
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <html dir="${currentLang === 'ar' ? 'rtl' : 'ltr'}"><head><title>طباعة</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet"></head>
+        <body style="padding:2rem; font-family:Cairo;">${printContent.innerHTML}</body></html>
+      `);
+      printWindow.document.close();
+      printWindow.print();
+    });
+    document.getElementById('closeInnerBtn')?.addEventListener('click', () => modal.classList.remove('active'));
+  }
+
+  function shareCard(platform, title, url) {
+    const t = translations[currentLang];
+    const shareText = `${t.shareMessagePrefix}${title} - مبسط.ma`;
+    const fullUrl = encodeURIComponent(url);
+    const encodedText = encodeURIComponent(shareText);
+    let shareLink = '';
+    switch(platform) {
+      case 'whatsapp': shareLink = `https://api.whatsapp.com/send?text=${encodedText}%20${fullUrl}`; break;
+      case 'facebook': shareLink = `https://www.facebook.com/sharer/sharer.php?u=${fullUrl}`; break;
+      case 'twitter': shareLink = `https://twitter.com/intent/tweet?text=${encodedText}&url=${fullUrl}`; break;
+      case 'linkedin': shareLink = `https://www.linkedin.com/sharing/share-offsite/?url=${fullUrl}`; break;
+      default: return;
+    }
+    window.open(shareLink, '_blank', 'noopener,noreferrer');
+  }
+
+  function renderCards() {
+    const t = translations[currentLang];
+    cardsContainer.innerHTML = t.cards.map(card => {
+      const pageUrl = window.location.href.split('#')[0] + '?card=' + card.id;
+      return `
+      <div class="card" data-card-id="${card.id}">
+        <div class="card-header">
+          <i class="fas ${card.icon}"></i>
+          <h2>${card.title}</h2>
+          <div class="subtitle">${card.subtitle}</div>
+        </div>
+        <div class="steps"><ul>${card.steps.map(step => `<li><i class="fas fa-check-circle" style="color:#006233;"></i> ${step}</li>`).join('')}</ul></div>
+        <button class="read-btn" data-id="${card.id}">${t.readMore} ←</button>
+        <div class="share-bar">
+          <i class="fab fa-whatsapp share-icon whatsapp" data-platform="whatsapp" data-title="${card.title}" data-url="${pageUrl}"></i>
+          <i class="fab fa-facebook share-icon facebook" data-platform="facebook" data-title="${card.title}" data-url="${pageUrl}"></i>
+          <i class="fab fa-twitter share-icon twitter" data-platform="twitter" data-title="${card.title}" data-url="${pageUrl}"></i>
+          <i class="fab fa-linkedin share-icon linkedin" data-platform="linkedin" data-title="${card.title}" data-url="${pageUrl}"></i>
+        </div>
+      </div>
+    `}).join('');
+    document.querySelectorAll('.read-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        const card = t.cards.find(c => c.id === id);
+        if (card) openModalWithContent(`<h3>${card.title}</h3>${card.modalContent}`);
+      });
+    });
+    document.querySelectorAll('.share-icon').forEach(icon => {
+      icon.addEventListener('click', (e) => {
+        const platform = icon.getAttribute('data-platform');
+        const title = icon.getAttribute('data-title');
+        const url = icon.getAttribute('data-url');
+        shareCard(platform, title, url);
+      });
+    });
+  }
+
+  function performSearch() {
+    const term = searchInput.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    let anyVisible = false;
+    cards.forEach(card => {
+      const cardText = card.innerText.toLowerCase();
+      if (term === '' || cardText.includes(term)) { card.style.display = ''; anyVisible = true; }
+      else card.style.display = 'none';
+    });
+    if (!anyVisible && term !== '') { noResultsDiv.classList.remove('hidden'); noResultsDiv.innerText = translations[currentLang].noResults; }
+    else noResultsDiv.classList.add('hidden');
+  }
+
+  function openCostCalculator() {
+    const t = translations[currentLang];
+    const isArabic = currentLang === 'ar';
+    const modalHtml = `
+      <h3>💰 ${isArabic ? 'حاسبة تكاليف تأسيس الشركة' : 'Calculateur de coûts de création'}</h3>
+      <div style="margin:1rem 0;">
+        <label>${isArabic ? 'شكل الشركة:' : 'Forme juridique :'}</label>
+        <select id="companyType" style="width:100%; padding:0.5rem; border-radius:8px;">
+          <option value="sarl">SARL</option>
+          <option value="suarl">SUARL</option>
+        </select>
+      </div>
+      <div style="margin:1rem 0;">
+        <label>${isArabic ? 'هل تستعين بمحاسب؟' : 'Avec un comptable ?'}</label>
+        <select id="accountant" style="width:100%; padding:0.5rem; border-radius:8px;">
+          <option value="no">${isArabic ? 'لا' : 'Non'}</option>
+          <option value="yes">${isArabic ? 'نعم' : 'Oui'}</option>
+        </select>
+      </div>
+      <div style="margin:1rem 0;">
+        <label>${isArabic ? '💼 رأس المال (درهم):' : '💼 Capital social (DH) :'}</label>
+        <input type="number" id="capital" value="1000" step="1000" style="width:100%; padding:0.5rem; border-radius:8px;">
+      </div>
+      <div id="calcResult" style="margin-top:1rem;"></div>
+      <div id="calcDetails" style="margin-top:1rem; padding:0.8rem; background:#f1f5f9; border-radius:1rem;"></div>
+    `;
+    openModalWithContent(modalHtml);
+    setTimeout(() => {
+      const companySelect = document.getElementById('companyType');
+      const accountantSelect = document.getElementById('accountant');
+      const capitalInput = document.getElementById('capital');
+      const updateCost = () => {
+        const company = companySelect ? companySelect.value : 'sarl';
+        const withAcc = accountantSelect ? accountantSelect.value === 'yes' : false;
+        const capital = capitalInput ? parseFloat(capitalInput.value) || 0 : 0;
+        let breakdown = {};
+        if (company === 'sarl') {
+          breakdown = {
+            [isArabic ? 'شهادة السلبية' : 'Certificat négatif']: 120,
+            [isArabic ? 'فتح حساب بنكي' : 'Ouverture compte bancaire']: 200,
+            [isArabic ? 'التسجيل بالسجل التجاري' : 'Inscription registre de commerce']: 450,
+            [isArabic ? 'النشر بالجريدة الرسمية' : 'Publication bulletin officiel']: 1200,
+            [isArabic ? 'الطابع الجبائي' : 'Timbre fiscal']: 150
+          };
+        } else {
+          breakdown = {
+            [isArabic ? 'شهادة السلبية' : 'Certificat négatif']: 120,
+            [isArabic ? 'فتح حساب بنكي' : 'Ouverture compte bancaire']: 150,
+            [isArabic ? 'التسجيل بالسجل التجاري' : 'Inscription registre de commerce']: 350,
+            [isArabic ? 'النشر بالجريدة الرسمية' : 'Publication bulletin officiel']: 1000,
+            [isArabic ? 'الطابع الجبائي' : 'Timbre fiscal']: 100
+          };
+        }
+        if (withAcc) breakdown[isArabic ? 'أتعاب المحاسب (تقديرية)' : 'Honoraires comptable'] = 2500;
+        const baseCost = Object.values(breakdown).reduce((a,b)=>a+b,0);
+        const total = baseCost + capital;
+        const currency = isArabic ? 'درهم' : 'DH';
+        const resultDiv = document.getElementById('calcResult');
+        const detailsDiv = document.getElementById('calcDetails');
+        if (resultDiv) resultDiv.innerHTML = `<div style="background:#e0f2e9; padding:0.8rem; border-radius:1rem;">${isArabic ? 'التكلفة التقديرية (بدون رأس المال):' : 'Coût estimé (hors capital):'} ${baseCost} ${currency}<br>${isArabic ? '💰 المجموع الإجمالي (تكاليف + رأس المال):' : '💰 Total général (coûts + capital):'} ${total} ${currency}</div>`;
+        if (detailsDiv) detailsDiv.innerHTML = `<strong>${isArabic ? 'تفاصيل التكاليف:' : 'Détail des coûts :'}</strong><ul>${Object.entries(breakdown).map(([k,v])=>`<li>${k}: ${v} ${currency}</li>`).join('')}</ul>`;
+      };
+      if (companySelect) companySelect.addEventListener('change', updateCost);
+      if (accountantSelect) accountantSelect.addEventListener('change', updateCost);
+      if (capitalInput) capitalInput.addEventListener('input', updateCost);
+      updateCost();
+    }, 50);
+  }
+
+  function handleContactSubmit(e) {
+    e.preventDefault();
+    const t = translations[currentLang];
+    const name = contactName.value.trim();
+    const email = contactEmail.value.trim();
+    const message = contactMessage.value.trim();
+    if (name === '' || email === '' || message === '') {
+      alert(currentLang === 'ar' ? 'يرجى ملء جميع الحقول' : 'Veuillez remplir tous les champs');
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      alert(currentLang === 'ar' ? 'البريد الإلكتروني غير صحيح' : 'Adresse e-mail invalide');
+      return;
+    }
+    const recipient = "support@mubassit.ma";
+    const subject = encodeURIComponent(t.mailtoSubject);
+    const body = encodeURIComponent(`${t.mailtoBodyPrefix}${name}\n${t.emailLabel}: ${email}${t.mailtoBodySuffix}${message}`);
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    alert(currentLang === 'ar' ? '📧 جاري فتح بريدك الإلكتروني... الرجاء إرسال الرسالة.' : '📧 Ouverture de votre messagerie... Veuillez envoyer le message.');
+    contactForm.reset();
+  }
+
+  // ========== Admin Panel ==========
+  function showAdminLogin() {
+    const pwd = prompt(currentLang === 'ar' ? '🔐 أدخل كلمة السر للمدير:' : '🔐 Entrez le mot de passe administrateur:');
+    if (pwd === 'admin123') {
+      showAdminPanel();
+    } else {
+      alert(currentLang === 'ar' ? 'كلمة السر غير صحيحة' : 'Mot de passe incorrect');
+    }
+  }
+
+  function showAdminPanel() {
+    const t = translations[currentLang];
+    const ar = translations.ar;
+    const fr = translations.fr;
+    modalContentDiv.innerHTML = `
+      <h3>🔧 لوحة تحكم المدير</h3>
+      <p style="margin-bottom:1rem;">يمكنك تعديل المحتوى باللغتين. التغييرات تحفظ تلقائياً.</p>
+      <form id="adminForm">
+        <h4>📋 البطاقات (العربية)</h4>
+        ${ar.cards.map((card, idx) => `
+          <div style="border:1px solid #ccc; padding:0.5rem; margin-bottom:1rem;">
+            <div class="admin-form-group"><label>عنوان البطاقة ${idx+1}</label><input type="text" name="ar_card_title_${idx}" value="${escapeHtml(card.title)}"></div>
+            <div class="admin-form-group"><label>الخطوات (افصل بينها بـ ||)</label><textarea name="ar_card_steps_${idx}" rows="2">${card.steps.join('||')}</textarea></div>
+            <div class="admin-form-group"><label>محتوى المودال (HTML)</label><textarea name="ar_card_modal_${idx}" rows="3">${escapeHtml(card.modalContent)}</textarea></div>
+          </div>
+        `).join('')}
+        <h4>📅 التواريخ (العربية)</h4>
+        ${ar.deadlines.map((dl, idx) => `
+          <div style="border:1px solid #ccc; padding:0.5rem; margin-bottom:1rem;">
+            <div class="admin-form-group"><label>الاسم</label><input type="text" name="ar_deadline_name_${idx}" value="${escapeHtml(dl.name)}"></div>
+            <div class="admin-form-group"><label>التاريخ (YYYY-MM-DD) أو اترك فارغاً</label><input type="text" name="ar_deadline_date_${idx}" value="${dl.date || ''}"></div>
+            <div class="admin-form-group"><label>التفاصيل</label><textarea name="ar_deadline_details_${idx}" rows="2">${escapeHtml(dl.details)}</textarea></div>
+          </div>
+        `).join('')}
+        <h4>❓ الأسئلة الشائعة (العربية)</h4>
+        ${ar.faqItems.map((faq, idx) => `
+          <div style="border:1px solid #ccc; padding:0.5rem; margin-bottom:1rem;">
+            <div class="admin-form-group"><label>السؤال</label><input type="text" name="ar_faq_q_${idx}" value="${escapeHtml(faq.question)}"></div>
+            <div class="admin-form-group"><label>الجواب</label><textarea name="ar_faq_a_${idx}" rows="2">${escapeHtml(faq.answer)}</textarea></div>
+          </div>
+        `).join('')}
+        <h4>📋 البطاقات (الفرنسية)</h4>
+        ${fr.cards.map((card, idx) => `
+          <div style="border:1px solid #ccc; padding:0.5rem; margin-bottom:1rem;">
+            <div class="admin-form-group"><label>Titre ${idx+1}</label><input type="text" name="fr_card_title_${idx}" value="${escapeHtml(card.title)}"></div>
+            <div class="admin-form-group"><label>Étapes (séparer par ||)</label><textarea name="fr_card_steps_${idx}" rows="2">${card.steps.join('||')}</textarea></div>
+            <div class="admin-form-group"><label>Contenu modal (HTML)</label><textarea name="fr_card_modal_${idx}" rows="3">${escapeHtml(card.modalContent)}</textarea></div>
+          </div>
+        `).join('')}
+        <h4>📅 Dates (français)</h4>
+        ${fr.deadlines.map((dl, idx) => `
+          <div style="border:1px solid #ccc; padding:0.5rem; margin-bottom:1rem;">
+            <div class="admin-form-group"><label>Nom</label><input type="text" name="fr_deadline_name_${idx}" value="${escapeHtml(dl.name)}"></div>
+            <div class="admin-form-group"><label>Date (YYYY-MM-DD) ou vide</label><input type="text" name="fr_deadline_date_${idx}" value="${dl.date || ''}"></div>
+            <div class="admin-form-group"><label>Détails</label><textarea name="fr_deadline_details_${idx}" rows="2">${escapeHtml(dl.details)}</textarea></div>
+          </div>
+        `).join('')}
+        <h4>❓ FAQ (français)</h4>
+        ${fr.faqItems.map((faq, idx) => `
+          <div style="border:1px solid #ccc; padding:0.5rem; margin-bottom:1rem;">
+            <div class="admin-form-group"><label>Question</label><input type="text" name="fr_faq_q_${idx}" value="${escapeHtml(faq.question)}"></div>
+            <div class="admin-form-group"><label>Réponse</label><textarea name="fr_faq_a_${idx}" rows="2">${escapeHtml(faq.answer)}</textarea></div>
+          </div>
+        `).join('')}
+        <button type="submit" style="background:#006233; color:white; border:none; padding:0.5rem 1rem; border-radius:40px;">💾 حفظ التعديلات</button>
+        <button type="button" id="closeAdminBtn" style="margin-right:1rem;">إغلاق</button>
+      </form>
+    `;
+    modal.classList.add('active');
+    const form = document.getElementById('adminForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newTranslations = JSON.parse(JSON.stringify(translations));
+      for (let i = 0; i < ar.cards.length; i++) {
+        newTranslations.ar.cards[i].title = form[`ar_card_title_${i}`].value;
+        newTranslations.ar.cards[i].steps = form[`ar_card_steps_${i}`].value.split('||').map(s => s.trim());
+        newTranslations.ar.cards[i].modalContent = form[`ar_card_modal_${i}`].value;
+      }
+      for (let i = 0; i < ar.deadlines.length; i++) {
+        newTranslations.ar.deadlines[i].name = form[`ar_deadline_name_${i}`].value;
+        newTranslations.ar.deadlines[i].date = form[`ar_deadline_date_${i}`].value || null;
+        newTranslations.ar.deadlines[i].details = form[`ar_deadline_details_${i}`].value;
+      }
+      for (let i = 0; i < ar.faqItems.length; i++) {
+        newTranslations.ar.faqItems[i].question = form[`ar_faq_q_${i}`].value;
+        newTranslations.ar.faqItems[i].answer = form[`ar_faq_a_${i}`].value;
+      }
+      for (let i = 0; i < fr.cards.length; i++) {
+        newTranslations.fr.cards[i].title = form[`fr_card_title_${i}`].value;
+        newTranslations.fr.cards[i].steps = form[`fr_card_steps_${i}`].value.split('||').map(s => s.trim());
+        newTranslations.fr.cards[i].modalContent = form[`fr_card_modal_${i}`].value;
+      }
+      for (let i = 0; i < fr.deadlines.length; i++) {
+        newTranslations.fr.deadlines[i].name = form[`fr_deadline_name_${i}`].value;
+        newTranslations.fr.deadlines[i].date = form[`fr_deadline_date_${i}`].value || null;
+        newTranslations.fr.deadlines[i].details = form[`fr_deadline_details_${i}`].value;
+      }
+      for (let i = 0; i < fr.faqItems.length; i++) {
+        newTranslations.fr.faqItems[i].question = form[`fr_faq_q_${i}`].value;
+        newTranslations.fr.faqItems[i].answer = form[`fr_faq_a_${i}`].value;
+      }
+      translations = newTranslations;
+      localStorage.setItem('mubassit_translations', JSON.stringify(translations));
+      alert(currentLang === 'ar' ? '✅ تم حفظ التعديلات بنجاح' : '✅ Modifications enregistrées');
+      modal.classList.remove('active');
+      applyLanguage();
+      applyTheme();
+    });
+    document.getElementById('closeAdminBtn').addEventListener('click', () => modal.classList.remove('active'));
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function applyLanguage() {
+    const t = translations[currentLang];
+    document.getElementById('siteTitle').innerText = t.siteTitle;
+    document.getElementById('taglineText').innerText = t.tagline;
+    document.getElementById('subText').innerText = t.sub;
+    searchInput.placeholder = t.searchPlaceholder;
+    searchBtn.innerText = t.searchBtn;
+    document.getElementById('deadlinesTitle').innerText = t.deadlinesTitle;
+    costTeaserSpan.innerText = t.costTeaser;
+    costBtnSpan.innerText = t.costBtn;
+    document.getElementById('copyright').innerHTML = t.copyright;
+    document.getElementById('disclaimerText').innerText = t.disclaimer;
+    document.getElementById('contactTitle').innerHTML = `<i class="fas fa-envelope"></i> <span>${t.contactTitle}</span>`;
+    document.getElementById('nameLabel').innerText = t.nameLabel;
+    document.getElementById('emailLabel').innerText = t.emailLabel;
+    document.getElementById('messageLabel').innerText = t.messageLabel;
+    submitBtn.innerText = t.submitBtn;
+    document.getElementById('contactNote').innerText = t.contactNote;
+    renderQuickLinks();
+    renderDeadlines();
+    renderFAQ();
+    renderCards();
+    performSearch();
+  }
+
+  function applyTheme() {
+    if (isDark) document.body.classList.add('dark');
+    else document.body.classList.remove('dark');
+    themeBtn.innerHTML = isDark ? '☀️ فاتح' : '🌙 داكن';
+    if (currentLang === 'fr') themeBtn.innerHTML = isDark ? '☀️ Clair' : '🌙 Sombre';
+  }
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('mubassit_lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    applyLanguage();
+    applyTheme();
+  }
+
+  function setTheme(themeDark) {
+    isDark = themeDark;
+    localStorage.setItem('mubassit_theme', themeDark ? 'dark' : 'light');
+    applyTheme();
+  }
+
+  searchBtn.addEventListener('click', (e) => { e.preventDefault(); performSearch(); });
+  searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); performSearch(); } });
+  langBtn.addEventListener('click', () => setLanguage(currentLang === 'ar' ? 'fr' : 'ar'));
+  themeBtn.addEventListener('click', () => setTheme(!isDark));
+  adminBtn.addEventListener('click', showAdminLogin);
+  openCostCalcBtn.addEventListener('click', openCostCalculator);
+  closeModalBtn.addEventListener('click', () => modal.classList.remove('active'));
+  printModalBtn.addEventListener('click', () => {
+    const printContent = modalContentDiv.cloneNode(true);
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html dir="${currentLang === 'ar' ? 'rtl' : 'ltr'}"><head><title>طباعة</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet"></head>
+      <body style="padding:2rem; font-family:Cairo;">${printContent.innerHTML}</body></html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  });
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+  chatBubble.addEventListener('click', () => alert(translations[currentLang].chatAlert));
+  contactForm.addEventListener('submit', handleContactSubmit);
+
+  setLanguage(currentLang);
+  setTheme(isDark);
+</script>
+</body>
+</html>
